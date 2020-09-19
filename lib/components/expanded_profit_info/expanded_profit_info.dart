@@ -44,14 +44,14 @@ class _ExpandedProfitInfoState extends State<ExpandedProfitInfo>
                 widget.title,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 18,
                 ),
               ),
               Text(
                 widget.titleValue,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 18,
                 ),
               )
             ],
