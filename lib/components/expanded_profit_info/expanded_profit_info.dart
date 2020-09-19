@@ -42,7 +42,6 @@ class _ExpandedProfitInfoState extends State<ExpandedProfitInfo>
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
               ),
             ),
             Text(
@@ -50,7 +49,6 @@ class _ExpandedProfitInfoState extends State<ExpandedProfitInfo>
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
               ),
             )
           ],

@@ -1,6 +1,8 @@
+import 'package:finance_app/components/profit_sections/info_sections/info_fees_section.dart';
 import 'package:finance_app/components/profit_sections/simple_sections/simple_share_section.dart';
 import 'package:finance_app/components/profit_sections/total_info_section.dart';
 import 'package:finance_app/components/profit_sections/fees_section.dart';
+import 'package:finance_app/models/commission_fee.dart';
 import 'package:flutter/material.dart';
 
 class SimpleProfitForm extends StatefulWidget {
@@ -11,7 +13,7 @@ class SimpleProfitForm extends StatefulWidget {
 class _SimpleProfitFormState extends State<SimpleProfitForm> {
   double _purchasePrice = 0;
   double _sellingPrice = 0;
-  double _sharesQuantity = 0;
+  int _sharesQuantity = 0;
 
   double _buyCommission = 0;
   double _sellCommission = 0;
@@ -31,16 +33,24 @@ class _SimpleProfitFormState extends State<SimpleProfitForm> {
           SizedBox(
             height: 15,
           ),
-          TotalInfoSection(
+          InfoFeesSection(
+            buyCommission: CommissionFee(_buyCommission, false),
+            sellCommission: CommissionFee(_sellCommission, false),
+            sharesQuantity: _sharesQuantity,
             purchasePrice: _purchasePrice,
             sellingPrice: _sellingPrice,
-            sharesQuantity: _sharesQuantity,
-            spread: (_sellingPrice * _sharesQuantity) -
-                (_purchasePrice * _sharesQuantity),
-            buyCommission: _buyCommission,
-            sellCommission: _sellCommission,
-            spreadFees: _spreadFees,
+            spreadFee: _spreadFees,
           ),
+//          TotalInfoSection(
+//            purchasePrice: _purchasePrice,
+//            sellingPrice: _sellingPrice,
+//            sharesQuantity: _sharesQuantity,
+//            spread: (_sellingPrice * _sharesQuantity) -
+//                (_purchasePrice * _sharesQuantity),
+//            buyCommission: _buyCommission,
+//            sellCommission: _sellCommission,
+//            spreadFees: _spreadFees,
+//          ),
         ],
       ),
     );
@@ -60,7 +70,7 @@ class _SimpleProfitFormState extends State<SimpleProfitForm> {
 
   _sharesQuantityChanged(value) {
     setState(() {
-      _sharesQuantity = double.parse(value);
+      _sharesQuantity = int.parse(value);
     });
   }
 

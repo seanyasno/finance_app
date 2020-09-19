@@ -13,7 +13,7 @@ class InfoSection extends StatelessWidget {
   double buyCommission;
   double sellCommission;
   double spreadFee;
-
+  
   InfoSection(
       this.currentSharePrice,
       this.futureSharePrice,
@@ -46,8 +46,6 @@ class InfoSection extends StatelessWidget {
         ),
         child: Column(
           children: [
-
-
             ProfitInfo(
                 'Future Share Price', NumberFormat().format(futureSharePrice)),
             SizedBox(

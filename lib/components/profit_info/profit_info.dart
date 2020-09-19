@@ -16,7 +16,6 @@ class ProfitInfo extends StatelessWidget {
             _label,
             style: TextStyle(
               fontSize: 20,
-              fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
@@ -27,7 +26,6 @@ class ProfitInfo extends StatelessWidget {
               _value,
               style: TextStyle(
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),

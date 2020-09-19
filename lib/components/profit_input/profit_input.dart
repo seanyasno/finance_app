@@ -17,7 +17,6 @@ class ProfitInput extends StatelessWidget {
           style: TextStyle(
             fontSize: 20,
             color: Colors.white,
-            fontWeight: FontWeight.bold,
           ),
         ),
         Flexible(
@@ -28,7 +27,6 @@ class ProfitInput extends StatelessWidget {
             child: TextField(
               style: TextStyle(
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
               ),
               onChanged: onChangeCallback,
               keyboardType: TextInputType.number,
