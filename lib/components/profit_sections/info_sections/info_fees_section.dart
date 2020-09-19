@@ -53,17 +53,18 @@ class InfoFeesSection extends StatelessWidget {
                   NumberFormat().format(buyCommission.calculate(
                       data: purchasePrice * sharesQuantity)),
                 ),
-                SizedBox(height: 15),
+                SizedBox(height: 10),
                 ProfitInfo(
                   'Sell Commission',
                   NumberFormat().format(sellCommission.calculate(
                       data: sellingPrice * sharesQuantity)),
                 ),
-                SizedBox(height: 15),
+                SizedBox(height: 10),
                 ProfitInfo(
                   'Spread Fee',
                   NumberFormat().format(_calculateSpreadFee()),
                 ),
+                SizedBox(height: 5),
               ],
             ),
           ],

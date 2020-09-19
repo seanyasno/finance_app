@@ -1,4 +1,5 @@
 import 'package:finance_app/components/profit_sections/info_sections/info_fees_section.dart';
+import 'package:finance_app/components/profit_sections/info_sections/info_sum_section.dart';
 import 'package:finance_app/components/profit_sections/simple_sections/simple_share_section.dart';
 import 'package:finance_app/components/profit_sections/total_info_section.dart';
 import 'package:finance_app/components/profit_sections/fees_section.dart';
@@ -26,12 +27,22 @@ class _SimpleProfitFormState extends State<SimpleProfitForm> {
         children: [
           SimpleShareSection(_purchasePriceChanged, _sellingPriceChanged, _sharesQuantityChanged),
           SizedBox(
-            height: 15,
+            height: 5,
           ),
           FeesSection(_buyCommissionChanged, _sellCommissionChanged,
               _spreadFeesChanged),
           SizedBox(
-            height: 15,
+            height: 5,
+          ),
+          InfoSumSection(
+            purchasePrice: _purchasePrice,
+            sellingPrice: _sellingPrice,
+            sharesQuantity: _sharesQuantity,
+            buyCommission: CommissionFee(_buyCommission, false),
+            sellCommission: CommissionFee(_sellCommission, false),
+          ),
+          SizedBox(
+            height: 5,
           ),
           InfoFeesSection(
             buyCommission: CommissionFee(_buyCommission, false),
@@ -44,7 +55,7 @@ class _SimpleProfitFormState extends State<SimpleProfitForm> {
 //          TotalInfoSection(
 //            purchasePrice: _purchasePrice,
 //            sellingPrice: _sellingPrice,
-//            sharesQuantity: _sharesQuantity,
+//            sharesQuantity: double.parse(_sharesQuantity.toString()),
 //            spread: (_sellingPrice * _sharesQuantity) -
 //                (_purchasePrice * _sharesQuantity),
 //            buyCommission: _buyCommission,
