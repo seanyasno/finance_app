@@ -82,7 +82,7 @@ class InfoFeesSection extends StatelessWidget {
   double _calculateSpreadFee() {
     if (sellingPrice <= purchasePrice)
       return 0;
-    return (spreadFee / 100) *
+    return spreadFee *
         ((sellingPrice * sharesQuantity) -
             (purchasePrice * sharesQuantity));
   }

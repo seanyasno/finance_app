@@ -69,16 +69,6 @@ class _SimpleProfitFormState extends State<SimpleProfitForm> {
             sellingPrice: _sellingPrice,
             spreadFee: _spreadFees,
           ),
-//          TotalInfoSection(
-//            purchasePrice: _purchasePrice,
-//            sellingPrice: _sellingPrice,
-//            sharesQuantity: double.parse(_sharesQuantity.toString()),
-//            spread: (_sellingPrice * _sharesQuantity) -
-//                (_purchasePrice * _sharesQuantity),
-//            buyCommission: _buyCommission,
-//            sellCommission: _sellCommission,
-//            spreadFees: _spreadFees,
-//          ),
         ],
       ),
     );

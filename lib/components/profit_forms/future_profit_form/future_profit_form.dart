@@ -1,7 +1,12 @@
-import 'package:finance_app/components/profit_sections/fees_section.dart';
 import 'package:finance_app/components/profit_sections/future_sections/future_share_section.dart';
-import 'package:finance_app/components/profit_sections/info_section.dart';
+import 'package:finance_app/components/profit_sections/info_sections/info_fees_section.dart';
+import 'package:finance_app/components/profit_sections/info_sections/info_share_section.dart';
+import 'package:finance_app/components/profit_sections/info_sections/info_sum_section.dart';
+import 'package:finance_app/components/profit_sections/fees_section.dart';
+import 'package:finance_app/components/profit_info/profit_info.dart';
+import 'package:finance_app/models/commission_fee.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class FutureProfitForm extends StatefulWidget {
   @override
@@ -24,21 +29,47 @@ class _FutureProfitFormState extends State<FutureProfitForm> {
           FutureShareSection(_currentSharePriceChanged, _desiredProfitChanged,
               _sharesAmountChanged),
           SizedBox(
-            height: 15,
+            height: 5,
           ),
           FeesSection(
               _buyingFeeChanged, _sellingFeeChanged, _spreadFeesChanged),
           SizedBox(
-            height: 15,
+            height: 5,
           ),
-          InfoSection(
-              _currentSharePrice,
-              _getFutureSharePrice(),
-              _getFutureSharePrice() - _currentSharePrice,
-              _sharesAmount,
-              _buyingFee,
-              _sellingFee,
-              _spreadFees / 100),
+          InfoSumSection(
+            purchasePrice: _currentSharePrice,
+            sellingPrice: _getFutureSharePrice(),
+            sharesQuantity: _sharesAmount.toInt(),
+            buyCommission: CommissionFee(_buyingFee, false),
+            sellCommission: CommissionFee(_sellingFee, false),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          InfoShareSection(
+            purchasePrice: _currentSharePrice,
+            sellingPrice: _getFutureSharePrice(),
+            sharesQuantity: _sharesAmount.toInt(),
+            buyCommission: CommissionFee(_buyingFee, false),
+            sellCommission: CommissionFee(_sellingFee, false),
+            spreadFee: _spreadFees,
+            children: [
+              ProfitInfo('Future Share Price',
+                  NumberFormat().format(_getFutureSharePrice())),
+              SizedBox(height: 10),
+            ],
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          InfoFeesSection(
+            purchasePrice: _currentSharePrice,
+            sellingPrice: _getFutureSharePrice(),
+            sharesQuantity: _sharesAmount.toInt(),
+            buyCommission: CommissionFee(_buyingFee, false),
+            sellCommission: CommissionFee(_sellingFee, false),
+            spreadFee: _spreadFees,
+          ),
         ],
       ),
     );
@@ -70,7 +101,7 @@ class _FutureProfitFormState extends State<FutureProfitForm> {
 
   _spreadFeesChanged(value) {
     setState(() {
-      _spreadFees = double.parse(value);
+      _spreadFees = double.parse(value) / 100;
     });
   }
 
@@ -81,9 +112,8 @@ class _FutureProfitFormState extends State<FutureProfitForm> {
   }
 
   double _getFutureSharePrice() {
-    return ((_buyingFee + _sellingFee + _desiredProfit) /
-                (1 - 2 * (_spreadFees / 100))) /
-            (_sharesAmount == 0 ? 1 : _sharesAmount) +
-        _currentSharePrice;
+    return ((_buyingFee + _sellingFee + _desiredProfit)) /
+            ((1 - _spreadFees) * _sharesAmount) + _currentSharePrice;
+
   }
 }
