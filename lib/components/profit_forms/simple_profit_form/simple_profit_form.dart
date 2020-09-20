@@ -4,10 +4,7 @@ import 'package:finance_app/components/profit_sections/info_sections/info_sum_se
 import 'package:finance_app/components/profit_sections/simple_sections/simple_share_section.dart';
 import 'package:finance_app/components/profit_sections/fees_section.dart';
 import 'package:finance_app/components/profit_info/profit_info.dart';
-import 'package:finance_app/notifiers/ThemeTypeNotifier.dart';
-import 'package:finance_app/models/types/theme_type.dart';
 import 'package:finance_app/models/commission_fee.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -27,21 +24,9 @@ class _SimpleProfitFormState extends State<SimpleProfitForm> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeTypeNotifier themeTypeNotifier = Provider.of<ThemeTypeNotifier>(context);
-
     return Container(
       child: Column(
         children: [
-          Text(themeTypeNotifier.themeType.toString()),
-          RaisedButton(
-            child: Text('change theme'),
-            onPressed: () {
-              if (themeTypeNotifier.themeType == ThemeType.LIGHT)
-                themeTypeNotifier.themeType = ThemeType.DARK;
-              else
-                themeTypeNotifier.themeType = ThemeType.LIGHT;
-            },
-          ),
           SimpleShareSection(_purchasePriceChanged, _sellingPriceChanged, _sharesQuantityChanged),
           SizedBox(
             height: 5,
