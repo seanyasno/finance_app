@@ -1,10 +1,20 @@
-import 'package:finance_app/models/app_theme_factory.dart';
-import 'package:finance_app/models/types/theme_type.dart';
+import 'package:finance_app/notifiers/ThemeTypeNotifier.dart';
 import 'package:finance_app/pages/profit/profit_page.dart';
+import 'package:finance_app/models/app_theme_factory.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider.value(
+            value: ThemeTypeNotifier(),
+          )
+        ],
+        child: MyApp(),
+      ),
+    );
 
 class MyApp extends StatelessWidget {
   @override
@@ -17,7 +27,8 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       title: 'Finance',
-      theme: AppThemeFactory.getThemeData(context, ThemeType.DARK),
+      theme:
+          AppThemeFactory.getThemeData(context, Provider.of<ThemeTypeNotifier>(context).themeType),
       home: ProfitPage(),
       debugShowCheckedModeBanner: false,
     );
