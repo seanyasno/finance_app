@@ -123,3 +123,107 @@ class _SimpleProfitFormState extends State<SimpleProfitForm> {
     return _buyCommission + _sellCommission + (_sellingPrice > _purchasePrice ? spread * _spreadFees : 0);
   }
 }
+
+//class _SimpleProfitFormState extends State<SimpleProfitForm> {
+//  SimpleProfitFormNotifier _profitNotifier;
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    _profitNotifier = Provider.of<SimpleProfitFormNotifier>(context);
+//
+//    return Container(
+//      child: Column(
+//        children: [
+//          SimpleShareSection(_purchasePriceChanged, _sellingPriceChanged,
+//              _sharesQuantityChanged),
+//          SizedBox(
+//            height: 5,
+//          ),
+//          FeesSection(_buyCommissionChanged, _sellCommissionChanged,
+//              _spreadFeesChanged),
+//          SizedBox(
+//            height: 5,
+//          ),
+//          InfoSumSection(
+//            purchasePrice: _profitNotifier.purchasePrice,
+//            sellingPrice: _profitNotifier.sellingPrice,
+//            sharesQuantity: _profitNotifier.sharesQuantity,
+//            buyCommission: _profitNotifier.buyCommission,
+//            sellCommission: _profitNotifier.sellCommission,
+//          ),
+//          SizedBox(
+//            height: 5,
+//          ),
+//          InfoShareSection(
+//            purchasePrice: _profitNotifier.purchasePrice,
+//            sellingPrice: _profitNotifier.sellingPrice,
+//            sharesQuantity: _profitNotifier.sharesQuantity,
+//            buyCommission: _profitNotifier.buyCommission,
+//            sellCommission: _profitNotifier.sellCommission,
+//            spreadFee: _profitNotifier.spreadFee,
+//            children: [
+//              ProfitInfo(
+//                  'Profit / Loss', NumberFormat().format(_calculateProfit())),
+//              SizedBox(height: 10),
+//            ],
+//          ),
+//          SizedBox(
+//            height: 5,
+//          ),
+//          InfoFeesSection(
+//            buyCommission: _profitNotifier.buyCommission,
+//            sellCommission: _profitNotifier.sellCommission,
+//            sharesQuantity: _profitNotifier.sharesQuantity,
+//            purchasePrice: _profitNotifier.purchasePrice,
+//            sellingPrice: _profitNotifier.sellingPrice,
+//            spreadFee: _profitNotifier.spreadFee,
+//          ),
+//        ],
+//      ),
+//    );
+//  }
+//
+//  _purchasePriceChanged(value) {
+//    _profitNotifier.purchasePrice = double.parse(value);
+//  }
+//
+//  _sellingPriceChanged(value) {
+//    _profitNotifier.sellingPrice = double.parse(value);
+//  }
+//
+//  _sharesQuantityChanged(value) {
+//    _profitNotifier.sharesQuantity = int.parse(value);
+//  }
+//
+//  _buyCommissionChanged(value) {
+//    _profitNotifier.buyCommission = CommissionFee(double.parse(value), false);
+//  }
+//
+//  _sellCommissionChanged(value) {
+//    _profitNotifier.sellCommission = CommissionFee(double.parse(value), false);
+//  }
+//
+//  _spreadFeesChanged(value) {
+//    _profitNotifier.spreadFee = double.parse(value) / 100;
+//  }
+//
+//  double _calculateProfit() {
+//    return (_profitNotifier.sellingPrice * _profitNotifier.sharesQuantity) -
+//        (_profitNotifier.purchasePrice * _profitNotifier.sharesQuantity) -
+//        (_profitNotifier.sellingPrice > _profitNotifier.purchasePrice
+//            ? _calculateTotalFees()
+//            : _profitNotifier.buyCommission.value +
+//                _profitNotifier.sellCommission.value);
+//  }
+//
+//  double _calculateTotalFees() {
+//    double spread =
+//        (_profitNotifier.sellingPrice * _profitNotifier.sharesQuantity) -
+//            (_profitNotifier.purchasePrice * _profitNotifier.sharesQuantity);
+//    return _profitNotifier.buyCommission.value +
+//        _profitNotifier.sellCommission.value +
+//        (_profitNotifier.sellingPrice > _profitNotifier.purchasePrice
+//            ? spread * _profitNotifier.spreadFee
+//            : 0);
+//  }
+//}

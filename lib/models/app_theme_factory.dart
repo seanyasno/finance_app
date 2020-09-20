@@ -21,6 +21,7 @@ class AppThemeFactory {
           backgroundColor: Colors.white,
           indicatorColor: Colors.black,
           iconTheme: IconThemeData(color: Colors.black),
+          cursorColor: Colors.white,
         );
       case ThemeType.DARK:
         return ThemeData(
@@ -31,6 +32,7 @@ class AppThemeFactory {
           backgroundColor: Color(0xFF2D2D2D),
           indicatorColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.white),
+          cursorColor: Colors.white,
         );
       default:
         return null;

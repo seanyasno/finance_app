@@ -25,6 +25,7 @@ class ProfitInput extends StatelessWidget {
             width: 150,
             height: 35,
             child: TextField(
+              cursorColor: Theme.of(context).cursorColor,
               style: TextStyle(
                 color: Colors.white,
               ),
