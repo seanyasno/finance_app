@@ -14,15 +14,19 @@ class _ProfitPageState extends State<ProfitPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          brightness: Brightness.light,
           elevation: 0,
           title: Text(
             'Profit Calculator',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
+            style: TextStyle(
+              color: Theme.of(context).textTheme.headline6.color,
+              fontWeight: FontWeight.w700,
+            ),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).backgroundColor,
           bottom: TabBar(
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
+            indicatorColor: Theme.of(context).indicatorColor,
+            labelColor: Theme.of(context).textTheme.subtitle1.color,
             tabs: [
               Tab(
                 text: 'Simple',
@@ -33,7 +37,7 @@ class _ProfitPageState extends State<ProfitPage> {
             ],
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: TabBarView(
           children: [
             SingleChildScrollView(

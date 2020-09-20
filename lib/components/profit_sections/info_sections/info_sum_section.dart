@@ -46,7 +46,7 @@ class InfoSumSection extends StatelessWidget {
               title: 'Total Buying Value',
               titleValue: NumberFormat().format(_calculateTotalBuyingValue()),
               children: [
-                ProfitInfo('Shares Value',
+                ProfitInfo('Shares Buying Value',
                     NumberFormat().format(purchasePrice * sharesQuantity)),
                 SizedBox(height: 10),
                 ProfitInfo(
@@ -60,7 +60,7 @@ class InfoSumSection extends StatelessWidget {
               title: 'Total Selling Value',
               titleValue: NumberFormat().format(_calculateTotalSellingValue()),
               children: [
-                ProfitInfo('Shares Value',
+                ProfitInfo('Shares Selling Value',
                     NumberFormat().format(sellingPrice * sharesQuantity)),
                 SizedBox(height: 10),
                 ProfitInfo(
