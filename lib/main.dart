@@ -23,11 +23,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeType themeType = Provider.of<ThemeTypeNotifier>(context).themeType;
 
-    return MaterialApp(
-      title: 'Finance',
-      theme: AppThemeFactory.getThemeData(context, themeType),
-      home: ProfitPage(),
-      debugShowCheckedModeBanner: false,
+    return StreamBuilder<bool>(
+      initialData: themeType == ThemeType.DARK,
+      builder: (context, snapshot) => MaterialApp(
+        title: 'Finance',
+        theme: AppThemeFactory.getThemeData(context, themeType),
+        home: ProfitPage(),
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }
