@@ -2,8 +2,8 @@ import 'package:finance_app/components/profit_forms/future_profit_form/future_pr
 import 'package:finance_app/components/profit_forms/simple_profit_form/simple_profit_form.dart';
 import 'package:finance_app/notifiers/ThemeTypeNotifier.dart';
 import 'package:finance_app/models/types/theme_type.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 
 class ProfitPage extends StatefulWidget {
   @override
