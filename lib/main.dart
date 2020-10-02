@@ -1,4 +1,4 @@
-import 'package:finance_app/notifiers/ThemeTypeNotifier.dart';
+import 'package:finance_app/notifiers/theme-type-notifier.dart';
 import 'package:finance_app/notifiers/simple_profit_form_notifier.dart';
 import 'package:finance_app/pages/profit/profit_page.dart';
 import 'package:finance_app/models/app_theme_factory.dart';
