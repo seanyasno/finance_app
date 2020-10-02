@@ -1,3 +1,4 @@
+import 'package:finance_app/notifiers/future_profit_form_notifier.dart';
 import 'package:finance_app/notifiers/theme-type-notifier.dart';
 import 'package:finance_app/notifiers/simple_profit_form_notifier.dart';
 import 'package:finance_app/pages/profit/profit_page.dart';
@@ -12,7 +13,13 @@ void main() {
       providers: [
         ChangeNotifierProvider.value(
           value: ThemeTypeNotifier(),
-        )
+        ),
+        ChangeNotifierProvider.value(
+          value: SimpleProfitFormNotifier(),
+        ),
+        ChangeNotifierProvider.value(
+          value: FutureProfitFormNotifier(),
+        ),
       ],
       child: MyApp(),
     ),

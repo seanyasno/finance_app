@@ -70,7 +70,8 @@ class _ProfitPageState extends State<ProfitPage> {
                   activeColor: Colors.greenAccent,
                   title: Text(
                     'Dark Mode',
-                    style: TextStyle(color: Theme.of(context).textTheme.bodyText2.color),
+                    style: TextStyle(
+                        color: Theme.of(context).textTheme.bodyText2.color),
                   ),
                   value: themeTypeNotifier.themeType == ThemeType.DARK,
                   onChanged: (value) {
