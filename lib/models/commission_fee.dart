@@ -1,15 +1,27 @@
 import 'package:finance_app/abstraction/fee.dart';
+import 'package:flutter/material.dart';
 
-class CommissionFee implements IFee {
+class CommissionFee with ChangeNotifier implements IFee  {
   double _value;
+  bool _usePercentage;
 
-  CommissionFee(this._value, this.usePercentage);
+  CommissionFee(this._value, this._usePercentage);
 
   @override
   double get value => _value;
 
   @override
-  bool usePercentage;
+  bool get usePercentage => _usePercentage;
+
+  set value(double value) {
+    this._value = value;
+    notifyListeners();
+  }
+
+  set usePercentage(bool value) {
+    _usePercentage = value;
+    notifyListeners();
+  }
 
   @override
   double calculate({double data}) {

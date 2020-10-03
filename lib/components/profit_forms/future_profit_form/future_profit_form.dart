@@ -37,7 +37,26 @@ class _FutureProfitFormState extends State<FutureProfitForm>
             height: 5,
           ),
           FeesSection(
-              _buyingFeeChanged, _sellingFeeChanged, _spreadFeesChanged),
+            _buyingFeeChanged,
+            _sellingFeeChanged,
+            _spreadFeesChanged,
+            buyExtraWidget: Switch(
+              activeColor: Colors.deepOrange[800],
+              value: _profitNotifier.buyCommission.usePercentage,
+              onChanged: (value) {
+                _profitNotifier.buyCommission.usePercentage = value;
+              },
+            ),
+            sellExtraWidget: Switch(
+              activeColor: Colors.deepOrange[800],
+              value: _profitNotifier.sellCommission.usePercentage,
+              onChanged: (value) {
+                _profitNotifier.sellCommission.usePercentage = value;
+              },
+            ),
+            useBuyPercentage: _profitNotifier.buyCommission.usePercentage,
+            useSellPercentage: _profitNotifier.sellCommission.usePercentage,
+          ),
           SizedBox(
             height: 5,
           ),
@@ -105,7 +124,11 @@ class _FutureProfitFormState extends State<FutureProfitForm>
   }
 
   double _getFutureSharePrice() {
-    return ((_profitNotifier.buyCommission.calculate() + _profitNotifier.sellCommission.calculate() + _profitNotifier.desiredProfit)) /
+    double purchaseValue = _profitNotifier.purchasePrice * _profitNotifier.sharesQuantity;
+
+    return ((_profitNotifier.buyCommission.calculate(data: purchaseValue) +
+                _profitNotifier.sellCommission.calculate(data: purchaseValue) +
+                _profitNotifier.desiredProfit)) /
             ((1 - _profitNotifier.spreadFee) * _profitNotifier.sharesQuantity) +
         _profitNotifier.purchasePrice;
   }

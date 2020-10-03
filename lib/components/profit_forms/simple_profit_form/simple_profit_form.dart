@@ -15,7 +15,8 @@ class SimpleProfitForm extends StatefulWidget {
   _SimpleProfitFormState createState() => _SimpleProfitFormState();
 }
 
-class _SimpleProfitFormState extends State<SimpleProfitForm> with AutomaticKeepAliveClientMixin<SimpleProfitForm> {
+class _SimpleProfitFormState extends State<SimpleProfitForm>
+    with AutomaticKeepAliveClientMixin<SimpleProfitForm> {
   SimpleProfitFormNotifier _profitNotifier;
 
   @override
@@ -31,8 +32,27 @@ class _SimpleProfitFormState extends State<SimpleProfitForm> with AutomaticKeepA
           SizedBox(
             height: 5,
           ),
-          FeesSection(_buyCommissionChanged, _sellCommissionChanged,
-              _spreadFeesChanged),
+          FeesSection(
+            _buyCommissionChanged,
+            _sellCommissionChanged,
+            _spreadFeesChanged,
+            buyExtraWidget: Switch(
+              activeColor: Colors.deepOrange[800],
+              value: _profitNotifier.buyCommission.usePercentage,
+              onChanged: (value) {
+                _profitNotifier.buyCommission.usePercentage = value;
+              },
+            ),
+            sellExtraWidget: Switch(
+              activeColor: Colors.deepOrange[800],
+              value: _profitNotifier.sellCommission.usePercentage,
+              onChanged: (value) {
+                _profitNotifier.sellCommission.usePercentage = value;
+              },
+            ),
+            useBuyPercentage: _profitNotifier.buyCommission.usePercentage,
+            useSellPercentage: _profitNotifier.sellCommission.usePercentage,
+          ),
           SizedBox(
             height: 5,
           ),
@@ -88,7 +108,7 @@ class _SimpleProfitFormState extends State<SimpleProfitForm> with AutomaticKeepA
   }
 
   _buyCommissionChanged(value) {
-    _profitNotifier.buyCommission = CommissionFee(double.parse(value), false);
+    _profitNotifier.buyCommission.value = double.parse(value);
   }
 
   _sellCommissionChanged(value) {
@@ -100,20 +120,23 @@ class _SimpleProfitFormState extends State<SimpleProfitForm> with AutomaticKeepA
   }
 
   double _calculateProfit() {
+    double purchaseValue = _profitNotifier.purchasePrice * _profitNotifier.sharesQuantity;
+
     return (_profitNotifier.sellingPrice * _profitNotifier.sharesQuantity) -
         (_profitNotifier.purchasePrice * _profitNotifier.sharesQuantity) -
         (_profitNotifier.sellingPrice > _profitNotifier.purchasePrice
             ? _calculateTotalFees()
-            : _profitNotifier.buyCommission.value +
-                _profitNotifier.sellCommission.value);
+            : _profitNotifier.buyCommission.calculate(data: purchaseValue) +
+                _profitNotifier.sellCommission.calculate(data: purchaseValue));
   }
 
   double _calculateTotalFees() {
+    double purchaseValue = _profitNotifier.purchasePrice * _profitNotifier.sharesQuantity;
     double spread =
         (_profitNotifier.sellingPrice * _profitNotifier.sharesQuantity) -
             (_profitNotifier.purchasePrice * _profitNotifier.sharesQuantity);
-    return _profitNotifier.buyCommission.value +
-        _profitNotifier.sellCommission.value +
+    return _profitNotifier.buyCommission.calculate(data: purchaseValue) +
+        _profitNotifier.sellCommission.calculate(data: purchaseValue) +
         (_profitNotifier.sellingPrice > _profitNotifier.purchasePrice
             ? spread * _profitNotifier.spreadFee
             : 0);
