@@ -1,5 +1,8 @@
 import 'package:finance_app/components/profit_forms/future_profit_form/future_profit_form.dart';
 import 'package:finance_app/components/profit_forms/simple_profit_form/simple_profit_form.dart';
+import 'package:finance_app/notifiers/theme-type-notifier.dart';
+import 'package:finance_app/models/types/theme_type.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class ProfitPage extends StatefulWidget {
@@ -10,19 +13,27 @@ class ProfitPage extends StatefulWidget {
 class _ProfitPageState extends State<ProfitPage> {
   @override
   Widget build(BuildContext context) {
+    ThemeTypeNotifier themeTypeNotifier =
+        Provider.of<ThemeTypeNotifier>(context);
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          iconTheme: Theme.of(context).iconTheme,
+          brightness: Brightness.light,
           elevation: 0,
           title: Text(
             'Profit Calculator',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700),
+            style: TextStyle(
+              color: Theme.of(context).textTheme.headline6.color,
+              fontWeight: FontWeight.w700,
+            ),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).backgroundColor,
           bottom: TabBar(
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
+            indicatorColor: Theme.of(context).indicatorColor,
+            labelColor: Theme.of(context).textTheme.subtitle1.color,
             tabs: [
               Tab(
                 text: 'Simple',
@@ -33,7 +44,7 @@ class _ProfitPageState extends State<ProfitPage> {
             ],
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: TabBarView(
           children: [
             SingleChildScrollView(
@@ -49,6 +60,30 @@ class _ProfitPageState extends State<ProfitPage> {
               ),
             ),
           ],
+        ),
+        drawer: Drawer(
+          child: Container(
+            color: Theme.of(context).backgroundColor,
+            child: ListView(
+              children: [
+                SwitchListTile(
+                  activeColor: Colors.greenAccent,
+                  title: Text(
+                    'Dark Mode',
+                    style: TextStyle(
+                        color: Theme.of(context).textTheme.bodyText2.color),
+                  ),
+                  value: themeTypeNotifier.themeType == ThemeType.DARK,
+                  onChanged: (value) {
+                    if (value)
+                      themeTypeNotifier.themeType = ThemeType.DARK;
+                    else
+                      themeTypeNotifier.themeType = ThemeType.LIGHT;
+                  },
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:finance_app/components/profit_input/profit_input.dart';
+import 'package:finance_app/components/profit_input_extra/profit_input_extra.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -7,10 +8,15 @@ class FeesSection extends StatelessWidget {
   ValueChanged onSellingFeeChanged;
   ValueChanged onSpreadFeeChanged;
 
-  FeesSection(
-      this.onBuyingFeeChanged,
-      this.onSellingFeeChanged,
-      this.onSpreadFeeChanged);
+  Widget buyExtraWidget;
+  Widget sellExtraWidget;
+
+  bool useBuyPercentage = false;
+  bool useSellPercentage = false;
+
+  FeesSection(this.onBuyingFeeChanged, this.onSellingFeeChanged,
+      this.onSpreadFeeChanged,
+      {this.buyExtraWidget, this.sellExtraWidget, this.useBuyPercentage, this.useSellPercentage});
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +40,18 @@ class FeesSection extends StatelessWidget {
         ),
         child: Column(
           children: [
-            ProfitInput(
-              label: 'Buy Commission',
+            ProfitInputExtra(
+              label: 'Buy Commission${useBuyPercentage == true ? ' (%)' : ''}',
               onChangeCallback: onBuyingFeeChanged,
+              extraWidget: buyExtraWidget,
             ),
             SizedBox(
               height: 10,
             ),
-            ProfitInput(
-              label: 'Sell Commission',
+            ProfitInputExtra(
+              label: 'Sell Commission${useSellPercentage == true ? ' (%)' : ''}',
               onChangeCallback: onSellingFeeChanged,
+              extraWidget: sellExtraWidget,
             ),
             SizedBox(
               height: 10,

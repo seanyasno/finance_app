@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ProfitInput extends StatelessWidget {
+class ProfitInputExtra extends StatelessWidget {
   final String label;
-  final ValueChanged<String> onChangeCallback;
+  final ValueChanged onChangeCallback;
+  final Widget extraWidget;
 
-  ProfitInput({Key key, this.label, this.onChangeCallback})
-      : super(key: key);
+  ProfitInputExtra({this.label, this.onChangeCallback, this.extraWidget});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +19,10 @@ class ProfitInput extends StatelessWidget {
             color: Colors.white,
           ),
         ),
+        extraWidget ?? SizedBox(),
         Flexible(
           child: Container(
+            padding: EdgeInsets.only(left: extraWidget != null ? 0 : 15),
             width: 150,
             height: 35,
             child: TextField(
