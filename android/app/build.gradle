@@ -18,7 +18,7 @@ if (flutterVersionCode == null) {
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    flutterVersionName = '1.0.1'
+    flutterVersionName = '1.0.4'
 }
 
 apply plugin: 'com.android.application'
@@ -61,6 +61,10 @@ android {
 
     buildTypes {
         release {
+            // Custom added
+            minifyEnabled true
+            shrinkResources true
+
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug

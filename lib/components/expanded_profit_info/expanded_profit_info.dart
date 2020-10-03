@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ExpandedProfitInfo extends StatefulWidget {
@@ -33,48 +34,49 @@ class _ExpandedProfitInfoState extends State<ExpandedProfitInfo>
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ExpansionTile(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              widget.title,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+      child: ListTileTheme(
+        dense: true,
+        child: ExpansionTile(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                widget.title,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
               ),
-            ),
-            Text(
-              widget.titleValue,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            )
-          ],
-        ),
-        trailing: RotationTransition(
-          turns: _iconTurns,
-          child: const Icon(
-            Icons.expand_more,
-            color: Colors.white,
+              Text(
+                widget.titleValue,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
+              )
+            ],
           ),
+          trailing: RotationTransition(
+            turns: _iconTurns,
+            child: const Icon(
+              Icons.expand_more,
+              color: Colors.white,
+            ),
+          ),
+          tilePadding: EdgeInsets.all(0),
+          childrenPadding: EdgeInsets.only(bottom: 10),
+          expandedAlignment: Alignment.center,
+          onExpansionChanged: (expanded) {
+            if (expanded) {
+              _controller.forward();
+            } else {
+              _controller.reverse().then<void>((void value) {
+                if (!mounted) return;
+              });
+            }
+          },
+          children: widget.children ?? [],
         ),
-        tilePadding: EdgeInsets.all(0),
-        childrenPadding: EdgeInsets.only(bottom: 15),
-        expandedAlignment: Alignment.center,
-        onExpansionChanged: (expanded) {
-          if (expanded) {
-            _controller.forward();
-          } else {
-            _controller.reverse().then<void>((void value) {
-              if (!mounted) return;
-            });
-          }
-        },
-        children: widget.children ?? [],
       ),
     );
   }
