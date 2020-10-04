@@ -1,26 +1,18 @@
 import 'package:finance_app/components/forms/section_cards/section_card.dart';
+import 'package:finance_app/models/data/commissions-data.dart';
+import 'package:finance_app/models/data/shares-data.dart';
 import 'package:finance_app/models/sections/section_inner_info_expanded.dart';
 import 'package:finance_app/models/sections/section_inner_info.dart';
-import 'package:finance_app/models/commission_fee.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class InfoSumSection extends StatelessWidget {
-  final double purchasePrice;
-  final double sellingPrice;
-  final int sharesQuantity;
-
-  final CommissionFee buyCommission;
-  final CommissionFee sellCommission;
-  final double spreadFee;
+  final SharesData sharesData;
+  final CommissionsData commissionsData;
 
   InfoSumSection({
-    @required this.purchasePrice,
-    @required this.sellingPrice,
-    @required this.sharesQuantity,
-    @required this.buyCommission,
-    @required this.sellCommission,
-    @required this.spreadFee,
+    @required this.sharesData,
+    @required this.commissionsData,
   });
 
   @override
@@ -31,19 +23,19 @@ class InfoSumSection extends StatelessWidget {
           'Total Buying Value',
           NumberFormat().format(_calculateTotalBuyingValue()),
           [
-            SectionInnerInfo('Shares Buying Value', NumberFormat().format(purchasePrice * sharesQuantity)),
-            SectionInnerInfo('Buy Commission', NumberFormat().format(buyCommission.calculate(
-                data: purchasePrice * sharesQuantity))),
+            SectionInnerInfo('Shares Buying Value', NumberFormat().format(sharesData.purchasePrice * sharesData.sharesQuantity)),
+            SectionInnerInfo('Buy Commission', NumberFormat().format(commissionsData.buyCommission.calculate(
+                data: sharesData.purchasePrice * sharesData.sharesQuantity))),
           ],
         ),
-        SectionInnerInfo('Spread', NumberFormat().format(_calculateSpread())),
+        SectionInnerInfo('Spread', NumberFormat().format(sharesData.spread)),
         SectionInnerInfoExpanded(
           'Total Selling Value',
           NumberFormat().format(_calculateTotalSellingValue()),
           [
-            SectionInnerInfo('Shares Buying Value', NumberFormat().format(sellingPrice * sharesQuantity)),
-            SectionInnerInfo('Buy Commission', NumberFormat().format(sellCommission.calculate(
-                data: sellingPrice * sharesQuantity))),
+            SectionInnerInfo('Shares Buying Value', NumberFormat().format(sharesData.sellingPrice * sharesData.sharesQuantity)),
+            SectionInnerInfo('Buy Commission', NumberFormat().format(commissionsData.sellCommission.calculate(
+                data: sharesData.sellingPrice * sharesData.sharesQuantity))),
           ],
         ),
       ],
@@ -57,16 +49,12 @@ class InfoSumSection extends StatelessWidget {
   }
 
   double _calculateTotalBuyingValue() {
-    return purchasePrice * sharesQuantity +
-        buyCommission.calculate(data: purchasePrice * sharesQuantity);
+    return sharesData.purchasePrice * sharesData.sharesQuantity +
+        commissionsData.buyCommission.calculate(data: sharesData.purchasePrice * sharesData.sharesQuantity);
   }
 
   double _calculateTotalSellingValue() {
-    return sellingPrice * sharesQuantity +
-        sellCommission.calculate(data: sellingPrice * sharesQuantity);
-  }
-
-  double _calculateSpread() {
-    return (sellingPrice * sharesQuantity) - (purchasePrice * sharesQuantity);
+    return sharesData.sellingPrice * sharesData.sharesQuantity +
+        commissionsData.sellCommission.calculate(data: sharesData.sellingPrice * sharesData.sharesQuantity);
   }
 }

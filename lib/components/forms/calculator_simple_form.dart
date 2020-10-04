@@ -3,6 +3,8 @@ import 'package:finance_app/components/forms/sections/info/info_sum_section.dart
 import 'package:finance_app/components/forms/sections/input/fees_input_section.dart';
 import 'package:finance_app/components/forms/sections/input/simple_input_section.dart';
 import 'package:finance_app/components/forms/sections/info/info_fees_section.dart';
+import 'package:finance_app/models/data/commissions-data.dart';
+import 'package:finance_app/models/data/shares-data.dart';
 import 'package:finance_app/notifiers/calculators/calculator_simple_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,10 +18,15 @@ class _CalculatorSimpleFormState extends State<CalculatorSimpleForm>
     with AutomaticKeepAliveClientMixin {
   CalculatorSimpleNotifier _profitNotifier;
 
+  SharesData _sharesData;
+  CommissionsData _commissionsData;
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
     _profitNotifier = Provider.of<CalculatorSimpleNotifier>(context);
+    _sharesData = SharesData(_profitNotifier.purchasePrice, _profitNotifier.sellingPrice, _profitNotifier.sharesQuantity);
+    _commissionsData = CommissionsData(_profitNotifier.buyCommission, _profitNotifier.sellCommission, _profitNotifier.spreadFee);
 
     return Container(
       child: Column(
@@ -41,34 +48,22 @@ class _CalculatorSimpleFormState extends State<CalculatorSimpleForm>
             height: 5,
           ),
           InfoSumSection(
-            purchasePrice: _profitNotifier.purchasePrice,
-            sellingPrice: _profitNotifier.sellingPrice,
-            sharesQuantity: _profitNotifier.sharesQuantity,
-            buyCommission: _profitNotifier.buyCommission,
-            sellCommission: _profitNotifier.sellCommission,
-            spreadFee: _profitNotifier.spreadFee,
+            sharesData: _sharesData,
+            commissionsData: _commissionsData,
           ),
           SizedBox(
             height: 5,
           ),
           InfoShareSection(
-            purchasePrice: _profitNotifier.purchasePrice,
-            sellingPrice: _profitNotifier.sellingPrice,
-            sharesQuantity: _profitNotifier.sharesQuantity,
-            buyCommission: _profitNotifier.buyCommission,
-            sellCommission: _profitNotifier.sellCommission,
-            spreadFee: _profitNotifier.spreadFee,
+            sharesData: _sharesData,
+            commissionsData: _commissionsData,
           ),
           SizedBox(
             height: 5,
           ),
           InfoFeesSection(
-            purchasePrice: _profitNotifier.purchasePrice,
-            sellingPrice: _profitNotifier.sellingPrice,
-            sharesQuantity: _profitNotifier.sharesQuantity,
-            buyCommission: _profitNotifier.buyCommission,
-            sellCommission: _profitNotifier.sellCommission,
-            spreadFee: _profitNotifier.spreadFee,
+            sharesData: _sharesData,
+            commissionsData: _commissionsData,
           ),
         ],
       ),
