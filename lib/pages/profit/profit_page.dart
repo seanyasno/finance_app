@@ -1,6 +1,5 @@
+import 'package:finance_app/components/forms/calculator_desired_form.dart';
 import 'package:finance_app/components/forms/calculator_simple_form.dart';
-import 'package:finance_app/components/profit_forms/future_profit_form/future_profit_form.dart';
-import 'package:finance_app/components/profit_forms/simple_profit_form/simple_profit_form.dart';
 import 'package:finance_app/notifiers/theme-type-notifier.dart';
 import 'package:finance_app/models/types/theme_type.dart';
 import 'package:provider/provider.dart';
@@ -52,13 +51,12 @@ class _ProfitPageState extends State<ProfitPage> {
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 child: CalculatorSimpleForm(),
-                // child: SimpleProfitForm(),
               ),
             ),
             SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                child: FutureProfitForm(),
+                child: CalculatorDesiredForm(),
               ),
             ),
           ],

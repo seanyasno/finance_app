@@ -1,4 +1,4 @@
-import 'package:finance_app/components/forms/sections/info/info_share_section.dart';
+import 'package:finance_app/components/forms/sections/info/info_simple_share_section.dart';
 import 'package:finance_app/components/forms/sections/info/info_sum_section.dart';
 import 'package:finance_app/components/forms/sections/input/fees_input_section.dart';
 import 'package:finance_app/components/forms/sections/input/simple_input_section.dart';

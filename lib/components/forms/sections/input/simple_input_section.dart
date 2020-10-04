@@ -7,8 +7,11 @@ class SimpleInputSection extends StatelessWidget {
   final ValueChanged<String> onSellingPriceChanged;
   final ValueChanged<String> onShareQuantityChanged;
 
-  SimpleInputSection(this.onPurchasePriceChanged, this.onSellingPriceChanged,
-      this.onShareQuantityChanged);
+  SimpleInputSection(
+    this.onPurchasePriceChanged,
+    this.onSellingPriceChanged,
+    this.onShareQuantityChanged,
+  );
 
   @override
   Widget build(BuildContext context) {
