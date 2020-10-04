@@ -1,4 +1,3 @@
-import 'package:finance_app/components/profit_forms/future_profit_form/future_profit_form.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,7 +12,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
-          child: FutureProfitForm(),
+          child: Container(),
         ),
       ),
     );

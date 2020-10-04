@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ProfitInput extends StatelessWidget {
+class SectionInnerInput extends StatelessWidget {
   final String label;
-  final ValueChanged<String> onChangeCallback;
+  final ValueChanged onChangeCallback;
 
-  ProfitInput({Key key, this.label, this.onChangeCallback})
-      : super(key: key);
+  SectionInnerInput({
+    @required this.label,
+    @required this.onChangeCallback,
+  });
 
   @override
   Widget build(BuildContext context) {
