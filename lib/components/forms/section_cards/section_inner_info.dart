@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ProfitInfo extends StatelessWidget {
+class SectionInnerInfo extends StatelessWidget {
   final String _label;
   final String _value;
 
-  ProfitInfo(this._label, this._value);
+  SectionInnerInfo(this._label, this._value);
 
   @override
   Widget build(BuildContext context) {
