@@ -70,69 +70,6 @@ class _CalculatorSimpleFormState extends State<CalculatorSimpleForm>
             sellCommission: _profitNotifier.sellCommission,
             spreadFee: _profitNotifier.spreadFee,
           ),
-          // SimpleShareSection(_purchasePriceChanged, _sellingPriceChanged,
-          //     _sharesQuantityChanged),
-          // SizedBox(
-          //   height: 5,
-          // ),
-          // FeesSection(
-          //   _buyCommissionChanged,
-          //   _sellCommissionChanged,
-          //   _spreadFeesChanged,
-          //   buyExtraWidget: Switch(
-          //     activeColor: Colors.deepOrange[800],
-          //     value: _profitNotifier.buyCommission.usePercentage,
-          //     onChanged: (value) {
-          //       _profitNotifier.buyCommission.usePercentage = value;
-          //     },
-          //   ),
-          //   sellExtraWidget: Switch(
-          //     activeColor: Colors.deepOrange[800],
-          //     value: _profitNotifier.sellCommission.usePercentage,
-          //     onChanged: (value) {
-          //       _profitNotifier.sellCommission.usePercentage = value;
-          //     },
-          //   ),
-          //   useBuyPercentage: _profitNotifier.buyCommission.usePercentage,
-          //   useSellPercentage: _profitNotifier.sellCommission.usePercentage,
-          // ),
-          // SizedBox(
-          //   height: 5,
-          // ),
-          // InfoSumSection(
-          //   purchasePrice: _profitNotifier.purchasePrice,
-          //   sellingPrice: _profitNotifier.sellingPrice,
-          //   sharesQuantity: _profitNotifier.sharesQuantity,
-          //   buyCommission: _profitNotifier.buyCommission,
-          //   sellCommission: _profitNotifier.sellCommission,
-          // ),
-          // SizedBox(
-          //   height: 5,
-          // ),
-          // InfoShareSection(
-          //   purchasePrice: _profitNotifier.purchasePrice,
-          //   sellingPrice: _profitNotifier.sellingPrice,
-          //   sharesQuantity: _profitNotifier.sharesQuantity,
-          //   buyCommission: _profitNotifier.buyCommission,
-          //   sellCommission: _profitNotifier.sellCommission,
-          //   spreadFee: _profitNotifier.spreadFee,
-          //   children: [
-          //     ProfitInfo(
-          //         'Profit / Loss', NumberFormat().format(_calculateProfit())),
-          //     SizedBox(height: 10),
-          //   ],
-          // ),
-          // SizedBox(
-          //   height: 5,
-          // ),
-          // InfoFeesSection(
-          //   buyCommission: _profitNotifier.buyCommission,
-          //   sellCommission: _profitNotifier.sellCommission,
-          //   sharesQuantity: _profitNotifier.sharesQuantity,
-          //   purchasePrice: _profitNotifier.purchasePrice,
-          //   sellingPrice: _profitNotifier.sellingPrice,
-          //   spreadFee: _profitNotifier.spreadFee,
-          // ),
         ],
       ),
     );
