@@ -1,3 +1,4 @@
+import 'package:finance_app/notifiers/calculators/calculator_simple_notifier.dart';
 import 'package:finance_app/notifiers/future_profit_form_notifier.dart';
 import 'package:finance_app/notifiers/theme-type-notifier.dart';
 import 'package:finance_app/notifiers/simple_profit_form_notifier.dart';
@@ -16,6 +17,9 @@ void main() {
         ),
         ChangeNotifierProvider.value(
           value: SimpleProfitFormNotifier(),
+        ),
+        ChangeNotifierProvider.value(
+          value: CalculatorSimpleNotifier(),
         ),
         ChangeNotifierProvider.value(
           value: FutureProfitFormNotifier(),
