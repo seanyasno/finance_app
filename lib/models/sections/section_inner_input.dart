@@ -1,6 +1,6 @@
 import 'package:finance_app/abstraction/section_inner.dart';
-import 'package:finance_app/abstraction/section_inner_type.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:finance_app/models/types/section_inner_type.dart';
+import 'package:flutter/foundation.dart';
 
 class SectionInnerInput implements ISectionInner<ValueChanged> {
   String _label;

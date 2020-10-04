@@ -1,4 +1,5 @@
-import 'package:finance_app/abstraction/section_inner_type.dart';
+
+import 'package:finance_app/models/types/section_inner_type.dart';
 
 abstract class ISectionInner<T> {
   String get label;

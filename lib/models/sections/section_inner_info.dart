@@ -1,5 +1,5 @@
 import 'package:finance_app/abstraction/section_inner.dart';
-import 'package:finance_app/abstraction/section_inner_type.dart';
+import 'package:finance_app/models/types/section_inner_type.dart';
 
 class SectionInnerInfo implements ISectionInner<String> {
   final String _label;
