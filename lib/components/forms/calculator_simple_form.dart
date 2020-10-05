@@ -5,6 +5,7 @@ import 'package:finance_app/components/forms/sections/input/simple_input_section
 import 'package:finance_app/components/forms/sections/info/info_fees_section.dart';
 import 'package:finance_app/models/data/commissions-data.dart';
 import 'package:finance_app/models/data/shares-data.dart';
+import 'package:finance_app/models/data/transaction-sum-data.dart';
 import 'package:finance_app/notifiers/calculators/calculator_simple_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,15 +19,17 @@ class _CalculatorSimpleFormState extends State<CalculatorSimpleForm>
     with AutomaticKeepAliveClientMixin {
   CalculatorSimpleNotifier _profitNotifier;
 
-  SharesData _sharesData;
-  CommissionsData _commissionsData;
+  TransactionSumData _transactionSumData;
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     _profitNotifier = Provider.of<CalculatorSimpleNotifier>(context);
-    _sharesData = SharesData(_profitNotifier.purchasePrice, _profitNotifier.sellingPrice, _profitNotifier.sharesQuantity);
-    _commissionsData = CommissionsData(_profitNotifier.buyCommission, _profitNotifier.sellCommission, _profitNotifier.spreadFee);
+    _transactionSumData = TransactionSumData(SharesData(
+        _profitNotifier.purchasePrice, _profitNotifier.sellingPrice,
+        _profitNotifier.sharesQuantity), CommissionsData(
+        _profitNotifier.buyCommission, _profitNotifier.sellCommission,
+        _profitNotifier.spreadFee));
 
     return Container(
       child: Column(
@@ -48,22 +51,19 @@ class _CalculatorSimpleFormState extends State<CalculatorSimpleForm>
             height: 5,
           ),
           InfoSumSection(
-            sharesData: _sharesData,
-            commissionsData: _commissionsData,
+            transactionSumData: _transactionSumData,
           ),
           SizedBox(
             height: 5,
           ),
           InfoShareSection(
-            sharesData: _sharesData,
-            commissionsData: _commissionsData,
+            transactionSumData: _transactionSumData,
           ),
           SizedBox(
             height: 5,
           ),
           InfoFeesSection(
-            sharesData: _sharesData,
-            commissionsData: _commissionsData,
+            transactionSumData: _transactionSumData,
           ),
         ],
       ),
@@ -92,31 +92,6 @@ class _CalculatorSimpleFormState extends State<CalculatorSimpleForm>
 
   _spreadFeesChanged(value) {
     _profitNotifier.spreadFee = double.parse(value) / 100;
-  }
-
-  double _calculateProfit() {
-    double purchaseValue =
-        _profitNotifier.purchasePrice * _profitNotifier.sharesQuantity;
-
-    return (_profitNotifier.sellingPrice * _profitNotifier.sharesQuantity) -
-        (_profitNotifier.purchasePrice * _profitNotifier.sharesQuantity) -
-        (_profitNotifier.sellingPrice > _profitNotifier.purchasePrice
-            ? _calculateTotalFees()
-            : _profitNotifier.buyCommission.calculate(data: purchaseValue) +
-                _profitNotifier.sellCommission.calculate(data: purchaseValue));
-  }
-
-  double _calculateTotalFees() {
-    double purchaseValue =
-        _profitNotifier.purchasePrice * _profitNotifier.sharesQuantity;
-    double spread =
-        (_profitNotifier.sellingPrice * _profitNotifier.sharesQuantity) -
-            (_profitNotifier.purchasePrice * _profitNotifier.sharesQuantity);
-    return _profitNotifier.buyCommission.calculate(data: purchaseValue) +
-        _profitNotifier.sellCommission.calculate(data: purchaseValue) +
-        (_profitNotifier.sellingPrice > _profitNotifier.purchasePrice
-            ? spread * _profitNotifier.spreadFee
-            : 0);
   }
 
   @override

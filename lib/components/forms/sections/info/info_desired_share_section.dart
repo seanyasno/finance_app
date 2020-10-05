@@ -1,17 +1,14 @@
 import 'package:finance_app/components/forms/section_cards/section_card.dart';
-import 'package:finance_app/models/data/commissions-data.dart';
-import 'package:finance_app/models/data/shares-data.dart';
+import 'package:finance_app/models/data/transaction-sum-data.dart';
 import 'package:finance_app/models/sections/section_inner_info.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class InfoDesiredShareSection extends StatelessWidget {
-  final SharesData sharesData;
-  final CommissionsData commissionsData;
+  final TransactionSumData transactionSumData;
 
   InfoDesiredShareSection({
-    @required this.sharesData,
-    @required this.commissionsData,
+    @required this.transactionSumData,
   });
 
   @override
@@ -20,16 +17,16 @@ class InfoDesiredShareSection extends StatelessWidget {
       inners: [
         SectionInnerInfo(
           'Future Share Price',
-          NumberFormat().format(sharesData.sellingPrice),
+          NumberFormat().format(transactionSumData.sharesData.sellingPrice),
         ),
         SectionInnerInfo(
           'Share Growth (%)',
           _fixNaN(NumberFormat()
-              .format((sharesData.sellingPrice - sharesData.purchasePrice) / sharesData.purchasePrice * 100)),
+              .format((transactionSumData.sharesData.sellingPrice - transactionSumData.sharesData.purchasePrice) / transactionSumData.sharesData.purchasePrice * 100)),
         ),
         SectionInnerInfo(
           'Return On Investment (%)',
-          _fixNaN(NumberFormat().format(_calculateROI())),
+          _fixNaN(NumberFormat().format(transactionSumData.roi)),
         ),
       ],
       gradientColors: [
@@ -41,31 +38,5 @@ class InfoDesiredShareSection extends StatelessWidget {
 
   String _fixNaN(String value) {
     return value == "NaN" ? '0' : value;
-  }
-
-  double _calculateProfit() {
-    return (sharesData.sellingPrice * sharesData.sharesQuantity) -
-        (sharesData.purchasePrice * sharesData.sharesQuantity) -
-        (sharesData.sellingPrice > sharesData.purchasePrice
-            ? _calculateTotalFees()
-            : commissionsData.buyCommission.calculate(data: sharesData.sharesQuantity * sharesData.purchasePrice) +
-            commissionsData.sellCommission.calculate(data: sharesData.sharesQuantity * sharesData.sellingPrice));
-  }
-
-  double _calculateTotalFees() {
-    double spread =
-        (sharesData.sellingPrice * sharesData.sharesQuantity) - (sharesData.purchasePrice * sharesData.sharesQuantity);
-    return commissionsData.buyCommission.calculate(data: sharesData.sharesQuantity * sharesData.purchasePrice) +
-        commissionsData.sellCommission.calculate(data: sharesData.sharesQuantity * sharesData.sellingPrice) +
-        (sharesData.sellingPrice > sharesData.purchasePrice ? spread * commissionsData.spreadFee : 0);
-  }
-
-  double _calculateROI() {
-    double totalCommissions =
-        commissionsData.buyCommission.calculate(data: sharesData.sharesQuantity * sharesData.purchasePrice) +
-            commissionsData.sellCommission.calculate(data: sharesData.sharesQuantity * sharesData.sellingPrice);
-    return (_calculateProfit() /
-        (sharesData.purchasePrice * sharesData.sharesQuantity + totalCommissions)) *
-        100;
   }
 }
