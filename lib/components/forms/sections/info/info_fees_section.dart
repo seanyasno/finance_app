@@ -1,18 +1,15 @@
 import 'package:finance_app/components/forms/section_cards/section_card.dart';
-import 'package:finance_app/models/data/commissions-data.dart';
-import 'package:finance_app/models/data/shares-data.dart';
+import 'package:finance_app/models/data/transaction-sum-data.dart';
 import 'package:finance_app/models/sections/section_inner_info_expanded.dart';
 import 'package:finance_app/models/sections/section_inner_info.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class InfoFeesSection extends StatelessWidget {
-  final SharesData sharesData;
-  final CommissionsData commissionsData;
+  final TransactionSumData transactionSumData;
 
   InfoFeesSection({
-    @required this.sharesData,
-    @required this.commissionsData,
+    @required this.transactionSumData,
   });
 
   @override
@@ -21,21 +18,25 @@ class InfoFeesSection extends StatelessWidget {
       inners: [
         SectionInnerInfoExpanded(
           'Total Fees',
-          NumberFormat().format(_calculateTotalFees()),
+          NumberFormat().format(transactionSumData.totalFees),
           [
             SectionInnerInfo(
               'Buy Commission',
               NumberFormat().format(
-                  commissionsData.buyCommission.calculate(data: sharesData.purchasePrice * sharesData.sharesQuantity)),
+                  transactionSumData.commissionsData.buyCommission.calculate(
+                      data: transactionSumData.sharesData.purchasePrice *
+                          transactionSumData.sharesData.sharesQuantity)),
             ),
             SectionInnerInfo(
               'Sell Commission',
               NumberFormat().format(
-                  commissionsData.sellCommission.calculate(data: sharesData.sellingPrice * sharesData.sharesQuantity)),
+                  transactionSumData.commissionsData.sellCommission.calculate(
+                      data: transactionSumData.sharesData.sellingPrice *
+                          transactionSumData.sharesData.sharesQuantity)),
             ),
             SectionInnerInfo(
               'Spread Fee',
-              NumberFormat().format(_calculateSpreadFee()),
+              NumberFormat().format(transactionSumData.spreadFee),
             ),
           ],
         ),
@@ -47,17 +48,5 @@ class InfoFeesSection extends StatelessWidget {
       useVerticalPadding: false,
       addChildrenPadding: false,
     );
-  }
-
-  double _calculateTotalFees() {
-    return commissionsData.buyCommission.calculate(data: sharesData.purchasePrice * sharesData.sharesQuantity) +
-        commissionsData.sellCommission.calculate(data: sharesData.sellingPrice * sharesData.sharesQuantity) +
-        _calculateSpreadFee();
-  }
-
-  double _calculateSpreadFee() {
-    if (sharesData.sellingPrice <= sharesData.purchasePrice) return 0;
-    return commissionsData.spreadFee *
-        ((sharesData.sellingPrice * sharesData.sharesQuantity) - (sharesData.purchasePrice * sharesData.sharesQuantity));
   }
 }
