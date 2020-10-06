@@ -100,7 +100,6 @@ class _CalculatorSimpleFormState extends State<CalculatorSimpleForm>
 
   _useBuyPercentageChanged(value) {
     _profitNotifier.buyCommission.usePercentage = value;
-    print('${_profitNotifier.buyCommission.value}, ${_profitNotifier.buyCommission.usePercentage}, ${_transactionSumData.totalFees}');
   }
 
   _useSellPercentageChanged(value) {

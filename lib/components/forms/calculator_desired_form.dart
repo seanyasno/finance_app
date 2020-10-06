@@ -47,6 +47,10 @@ class _CalculatorDesiredFormState extends State<CalculatorDesiredForm>
             onBuyingFeeChanged: _buyCommissionChanged,
             onSellingFeeChanged: _sellCommissionChanged,
             onSpreadFeeChanged: _spreadFeesChanged,
+            useBuyPercentage: _profitNotifier.buyCommission.usePercentage,
+            useSellPercentage: _profitNotifier.sellCommission.usePercentage,
+            useBuyPercentageChanged: _useBuyPercentageChanged,
+            useSellPercentageChanged: _useSellPercentageChanged,
           ),
           SizedBox(
             height: 5,
@@ -95,15 +99,34 @@ class _CalculatorDesiredFormState extends State<CalculatorDesiredForm>
     _profitNotifier.spreadFee = double.parse(value) / 100;
   }
 
+  _useBuyPercentageChanged(value) {
+    _profitNotifier.buyCommission.usePercentage = value;
+  }
+
+  _useSellPercentageChanged(value) {
+    _profitNotifier.sellCommission.usePercentage = value;
+  }
+
   double _getFutureSharePrice() {
     double purchaseValue =
         _profitNotifier.purchasePrice * _profitNotifier.sharesQuantity;
 
-    return ((_profitNotifier.buyCommission.calculate(data: purchaseValue) +
-                _profitNotifier.sellCommission.calculate(data: purchaseValue) +
-                _profitNotifier.desiredProfit)) /
-            ((1 - _profitNotifier.spreadFee) * _profitNotifier.sharesQuantity) +
+    var futureSellingPriceWithSellPercentage = (((_profitNotifier.buyCommission.calculate(data: purchaseValue) +
+                    _profitNotifier.desiredProfit) /
+                _profitNotifier.sharesQuantity) +
+            (_profitNotifier.purchasePrice * (1 - _profitNotifier.spreadFee))) /
+        (1 -
+            _profitNotifier.spreadFee -
+            (_profitNotifier.sellCommission.value / 100));
+
+
+    var futureSharePrice = (_profitNotifier.buyCommission.calculate(data: purchaseValue) +
+        _profitNotifier.sellCommission.calculate(data: futureSellingPriceWithSellPercentage * _profitNotifier.sharesQuantity) +
+        _profitNotifier.desiredProfit) /
+        ((1 - _profitNotifier.spreadFee) * _profitNotifier.sharesQuantity) +
         _profitNotifier.purchasePrice;
+
+    return futureSharePrice;
   }
 
   @override

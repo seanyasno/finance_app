@@ -33,7 +33,7 @@ class FeesInputSection extends StatelessWidget {
           'toggleChanged': useBuyPercentageChanged,
           'inputChanged': onBuyingFeeChanged,
         }),
-        SectionInnerInputCommission('Buy Commission${useSellPercentage == true ? ' (%)' : ''}', {
+        SectionInnerInputCommission('Sell Commission${useSellPercentage == true ? ' (%)' : ''}', {
           'toggleValue': useSellPercentage,
           'toggleChanged': useSellPercentageChanged,
           'inputChanged': onSellingFeeChanged,
