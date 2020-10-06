@@ -46,6 +46,10 @@ class _CalculatorSimpleFormState extends State<CalculatorSimpleForm>
             onBuyingFeeChanged: _buyCommissionChanged,
             onSellingFeeChanged: _sellCommissionChanged,
             onSpreadFeeChanged: _spreadFeesChanged,
+            useBuyPercentage: _transactionSumData.commissionsData.buyCommission.usePercentage,
+            useSellPercentage: _transactionSumData.commissionsData.sellCommission.usePercentage,
+            useBuyPercentageChanged: _useBuyPercentageChanged,
+            useSellPercentageChanged: _useSellPercentageChanged,
           ),
           SizedBox(
             height: 5,
@@ -92,6 +96,15 @@ class _CalculatorSimpleFormState extends State<CalculatorSimpleForm>
 
   _spreadFeesChanged(value) {
     _profitNotifier.spreadFee = double.parse(value) / 100;
+  }
+
+  _useBuyPercentageChanged(value) {
+    _profitNotifier.buyCommission.usePercentage = value;
+    print('${_profitNotifier.buyCommission.value}, ${_profitNotifier.buyCommission.usePercentage}, ${_transactionSumData.totalFees}');
+  }
+
+  _useSellPercentageChanged(value) {
+    _profitNotifier.sellCommission.usePercentage = value;
   }
 
   @override

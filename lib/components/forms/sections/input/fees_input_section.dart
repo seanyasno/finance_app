@@ -1,5 +1,6 @@
 import 'package:finance_app/components/forms/section_cards/section_card.dart';
 import 'package:finance_app/models/sections/section_inner_input.dart';
+import 'package:finance_app/models/sections/section_inner_input_commission.dart';
 import 'package:flutter/material.dart';
 
 class FeesInputSection extends StatelessWidget {
@@ -7,8 +8,8 @@ class FeesInputSection extends StatelessWidget {
   final ValueChanged onSellingFeeChanged;
   final ValueChanged onSpreadFeeChanged;
 
-  final Widget buyExtraWidget;
-  final Widget sellExtraWidget;
+  final ValueChanged useBuyPercentageChanged;
+  final ValueChanged useSellPercentageChanged;
 
   final bool useBuyPercentage;
   final bool useSellPercentage;
@@ -17,8 +18,8 @@ class FeesInputSection extends StatelessWidget {
     @required this.onBuyingFeeChanged,
     @required this.onSellingFeeChanged,
     @required this.onSpreadFeeChanged,
-    this.buyExtraWidget,
-    this.sellExtraWidget,
+    this.useBuyPercentageChanged,
+    this.useSellPercentageChanged,
     this.useBuyPercentage,
     this.useSellPercentage,
   });
@@ -27,8 +28,16 @@ class FeesInputSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SectionCard(
       inners: [
-        SectionInnerInput('Buy Commission${useBuyPercentage == true ? ' (%)' : ''}', onBuyingFeeChanged),
-        SectionInnerInput('Sell Commission${useSellPercentage == true ? ' (%)' : ''}', onSellingFeeChanged),
+        SectionInnerInputCommission('Buy Commission${useBuyPercentage == true ? ' (%)' : ''}', {
+          'toggleValue': useBuyPercentage,
+          'toggleChanged': useBuyPercentageChanged,
+          'inputChanged': onBuyingFeeChanged,
+        }),
+        SectionInnerInputCommission('Buy Commission${useSellPercentage == true ? ' (%)' : ''}', {
+          'toggleValue': useSellPercentage,
+          'toggleChanged': useSellPercentageChanged,
+          'inputChanged': onSellingFeeChanged,
+        }),
         SectionInnerInput('Spread Fee (%)', onSpreadFeeChanged),
       ],
       gradientColors: [

@@ -1,5 +1,6 @@
 enum SectionInnerType {
   INFO,
   INPUT,
-  EXPANDED
+  EXPANDED,
+  INPUT_COMMISSION
 }

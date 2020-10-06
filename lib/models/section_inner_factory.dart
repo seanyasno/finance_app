@@ -3,6 +3,7 @@ import 'package:finance_app/components/forms/section_cards/section_inner_info.da
 import 'package:finance_app/abstraction/section_inner_factory.dart';
 import 'package:finance_app/abstraction/section_inner.dart';
 import 'package:finance_app/components/forms/section_cards/section_inner_input.dart';
+import 'package:finance_app/components/forms/section_cards/section_inner_input_commission.dart';
 import 'package:finance_app/models/types/section_inner_type.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +25,11 @@ class SectionInnerFactory implements ISectionInnerFactory {
         return SectionInnerInput(
           label: inner.label,
           onChangeCallback: inner.value,
+        );
+      case SectionInnerType.INPUT_COMMISSION:
+        return SectionInnerInputCommission(
+          label: inner.label,
+          value: inner.value,
         );
       default:
         return Container();
