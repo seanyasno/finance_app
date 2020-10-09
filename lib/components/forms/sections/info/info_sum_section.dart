@@ -20,19 +20,38 @@ class InfoSumSection extends StatelessWidget {
           'Total Buying Value',
           NumberFormat().format(_calculateTotalBuyingValue()),
           [
-            SectionInnerInfo('Shares Buying Value', NumberFormat().format(transactionSumData.sharesData.purchasePrice * transactionSumData.sharesData.sharesQuantity)),
-            SectionInnerInfo('Buy Commission', NumberFormat().format(transactionSumData.commissionsData.buyCommission.calculate(
-                data: transactionSumData.sharesData.purchasePrice * transactionSumData.sharesData.sharesQuantity))),
+            SectionInnerInfo(
+                'Shares Buying Value',
+                NumberFormat().format(
+                    transactionSumData.sharesData.purchasePrice *
+                        transactionSumData.sharesData.sharesQuantity)),
+            SectionInnerInfo(
+                'Buy Commission',
+                NumberFormat().format(
+                    transactionSumData.commissionsData.buyCommission.calculate(
+                        data: transactionSumData.sharesData.purchasePrice *
+                            transactionSumData.sharesData.sharesQuantity))),
           ],
         ),
-        SectionInnerInfo('Spread', NumberFormat().format(transactionSumData.sharesData.spread)),
+        SectionInnerInfo('Spread',
+            NumberFormat().format(transactionSumData.sharesData.spread)),
         SectionInnerInfoExpanded(
           'Total Selling Value',
           NumberFormat().format(_calculateTotalSellingValue()),
           [
-            SectionInnerInfo('Shares Buying Value', NumberFormat().format(transactionSumData.sharesData.sellingPrice * transactionSumData.sharesData.sharesQuantity)),
-            SectionInnerInfo('Buy Commission', NumberFormat().format(transactionSumData.commissionsData.sellCommission.calculate(
-                data: transactionSumData.sharesData.sellingPrice * transactionSumData.sharesData.sharesQuantity))),
+            SectionInnerInfo(
+                'Shares Buying Value',
+                NumberFormat().format(
+                    transactionSumData.sharesData.sellingPrice *
+                        transactionSumData.sharesData.sharesQuantity)),
+            SectionInnerInfo(
+                'Buy Commission',
+                NumberFormat().format(
+                    transactionSumData.commissionsData.sellCommission.calculate(
+                        data: transactionSumData.sharesData.sellingPrice *
+                            transactionSumData.sharesData.sharesQuantity))),
+            SectionInnerInfo('Spread Fee',
+                NumberFormat().format(transactionSumData.spreadFee)),
           ],
         ),
       ],
@@ -46,12 +65,19 @@ class InfoSumSection extends StatelessWidget {
   }
 
   double _calculateTotalBuyingValue() {
-    return transactionSumData.sharesData.purchasePrice * transactionSumData.sharesData.sharesQuantity +
-        transactionSumData.commissionsData.buyCommission.calculate(data: transactionSumData.sharesData.purchasePrice * transactionSumData.sharesData.sharesQuantity);
+    return transactionSumData.sharesData.purchasePrice *
+            transactionSumData.sharesData.sharesQuantity +
+        transactionSumData.commissionsData.buyCommission.calculate(
+            data: transactionSumData.sharesData.purchasePrice *
+                transactionSumData.sharesData.sharesQuantity);
   }
 
   double _calculateTotalSellingValue() {
-    return transactionSumData.sharesData.sellingPrice * transactionSumData.sharesData.sharesQuantity +
-        transactionSumData.commissionsData.sellCommission.calculate(data: transactionSumData.sharesData.sellingPrice * transactionSumData.sharesData.sharesQuantity);
+    return transactionSumData.sharesData.sellingPrice *
+            transactionSumData.sharesData.sharesQuantity -
+        transactionSumData.commissionsData.sellCommission.calculate(
+            data: transactionSumData.sharesData.sellingPrice *
+                transactionSumData.sharesData.sharesQuantity) -
+        transactionSumData.spreadFee;
   }
 }
