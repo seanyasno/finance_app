@@ -36,21 +36,21 @@ class _CalculatorDesiredFormState extends State<CalculatorDesiredForm>
       child: Column(
         children: [
           DesiredInputSection(
-            _purchasePriceChanged,
-            _desiredProfitChanged,
-            _sharesQuantityChanged,
+            (value) => _profitNotifier.purchasePrice = double.parse(value),
+            (value) => _profitNotifier.desiredProfit = double.parse(value),
+            (value) => _profitNotifier.sharesQuantity = int.parse(value),
           ),
           SizedBox(
             height: 5,
           ),
           FeesInputSection(
-            onBuyingFeeChanged: _buyCommissionChanged,
-            onSellingFeeChanged: _sellCommissionChanged,
-            onSpreadFeeChanged: _spreadFeesChanged,
+            onBuyingFeeChanged: (value) => _profitNotifier.buyCommission.value = double.parse(value),
+            onSellingFeeChanged: (value) => _profitNotifier.sellCommission.value = double.parse(value),
+            onSpreadFeeChanged: (value) => _profitNotifier.spreadFee = double.parse(value) / 100,
             useBuyPercentage: _profitNotifier.buyCommission.usePercentage,
             useSellPercentage: _profitNotifier.sellCommission.usePercentage,
-            useBuyPercentageChanged: _useBuyPercentageChanged,
-            useSellPercentageChanged: _useSellPercentageChanged,
+            useBuyPercentageChanged: (value) => _profitNotifier.buyCommission.usePercentage = value,
+            useSellPercentageChanged: (value) => _profitNotifier.sellCommission.usePercentage = value,
           ),
           SizedBox(
             height: 5,
@@ -73,38 +73,6 @@ class _CalculatorDesiredFormState extends State<CalculatorDesiredForm>
         ],
       ),
     );
-  }
-
-  _purchasePriceChanged(value) {
-    _profitNotifier.purchasePrice = double.parse(value);
-  }
-
-  _desiredProfitChanged(value) {
-    _profitNotifier.desiredProfit = double.parse(value);
-  }
-
-  _sharesQuantityChanged(value) {
-    _profitNotifier.sharesQuantity = int.parse(value);
-  }
-
-  _buyCommissionChanged(value) {
-    _profitNotifier.buyCommission.value = double.parse(value);
-  }
-
-  _sellCommissionChanged(value) {
-    _profitNotifier.sellCommission.value = double.parse(value);
-  }
-
-  _spreadFeesChanged(value) {
-    _profitNotifier.spreadFee = double.parse(value) / 100;
-  }
-
-  _useBuyPercentageChanged(value) {
-    _profitNotifier.buyCommission.usePercentage = value;
-  }
-
-  _useSellPercentageChanged(value) {
-    _profitNotifier.sellCommission.usePercentage = value;
   }
 
   double _getFutureSharePrice() {
