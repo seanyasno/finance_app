@@ -9,8 +9,9 @@ class InfoSumSection extends StatelessWidget {
   final TransactionSumData transactionSumData;
 
   InfoSumSection({
+    Key key,
     @required this.transactionSumData,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

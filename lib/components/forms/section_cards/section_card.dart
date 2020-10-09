@@ -11,13 +11,15 @@ class SectionCard extends StatelessWidget {
   final bool addChildrenPadding;
 
   SectionCard({
+    Key key,
     @required this.inners,
     @required this.gradientColors,
     this.sectionInnerFactory = const SectionInnerFactory(),
     this.useVerticalPadding = true,
     this.addChildrenPadding = true,
   })  : assert(inners != null && inners.length > 0),
-        assert(gradientColors != null && gradientColors.length > 0);
+        assert(gradientColors != null && gradientColors.length > 0),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {

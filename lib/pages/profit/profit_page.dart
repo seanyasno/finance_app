@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class ProfitPage extends StatefulWidget {
+  ProfitPage({Key key}) : super(key: key);
+
   @override
   _ProfitPageState createState() => _ProfitPageState();
 }

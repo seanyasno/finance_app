@@ -8,8 +8,9 @@ class InfoDesiredShareSection extends StatelessWidget {
   final TransactionSumData transactionSumData;
 
   InfoDesiredShareSection({
+    Key key,
     @required this.transactionSumData,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -15,6 +15,7 @@ class FeesInputSection extends StatelessWidget {
   final bool useSellPercentage;
 
   FeesInputSection({
+    Key key,
     @required this.onBuyingFeeChanged,
     @required this.onSellingFeeChanged,
     @required this.onSpreadFeeChanged,
@@ -22,7 +23,7 @@ class FeesInputSection extends StatelessWidget {
     this.useSellPercentageChanged,
     this.useBuyPercentage,
     this.useSellPercentage,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

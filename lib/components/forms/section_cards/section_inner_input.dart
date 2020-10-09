@@ -5,9 +5,10 @@ class SectionInnerInput extends StatelessWidget {
   final ValueChanged onChangeCallback;
 
   SectionInnerInput({
+    Key key,
     @required this.label,
     @required this.onChangeCallback,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

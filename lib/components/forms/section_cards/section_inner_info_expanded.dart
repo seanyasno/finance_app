@@ -9,14 +9,16 @@ class SectionInnerInfoExpanded extends StatefulWidget {
   final List<ISectionInner> innerInfos;
   final ISectionInnerFactory sectionInnerFactory;
 
-  SectionInnerInfoExpanded({
-    @required this.label,
-    @required this.value,
-    @required this.innerInfos,
-    this.sectionInnerFactory = const SectionInnerFactory()
-  })  : assert(label != null),
+  SectionInnerInfoExpanded(
+      {Key key,
+      @required this.label,
+      @required this.value,
+      @required this.innerInfos,
+      this.sectionInnerFactory = const SectionInnerFactory()})
+      : assert(label != null),
         assert(value != null),
-        assert(innerInfos != null && innerInfos.length > 0);
+        assert(innerInfos != null && innerInfos.length > 0),
+        super(key: key);
 
   @override
   _SectionInnerInfoExpandedState createState() =>
@@ -28,9 +30,9 @@ class _SectionInnerInfoExpandedState extends State<SectionInnerInfoExpanded>
   Duration _kExpand = Duration(milliseconds: 200);
 
   static final Animatable<double> _easeInTween =
-  CurveTween(curve: Curves.easeIn);
+      CurveTween(curve: Curves.easeIn);
   static final Animatable<double> _halfTween =
-  Tween<double>(begin: 0.0, end: 0.5);
+      Tween<double>(begin: 0.0, end: 0.5);
 
   AnimationController _controller;
   Animation<double> _iconTurns;
@@ -46,10 +48,12 @@ class _SectionInnerInfoExpandedState extends State<SectionInnerInfoExpanded>
   Widget build(BuildContext context) {
     List<Widget> widgets = [];
     for (int i = 0; i < widget.innerInfos.length - 1; i++) {
-      widgets.add(widget.sectionInnerFactory.generateWidget(widget.innerInfos[i]));
+      widgets
+          .add(widget.sectionInnerFactory.generateWidget(widget.innerInfos[i]));
       widgets.add(SizedBox(height: 10));
     }
-    widgets.add(widget.sectionInnerFactory.generateWidget(widget.innerInfos[widget.innerInfos.length - 1]));
+    widgets.add(widget.sectionInnerFactory
+        .generateWidget(widget.innerInfos[widget.innerInfos.length - 1]));
 
     return Container(
       child: ListTileTheme(

@@ -4,7 +4,7 @@ class SectionInnerInfo extends StatelessWidget {
   final String _label;
   final String _value;
 
-  SectionInnerInfo(this._label, this._value);
+  SectionInnerInfo(this._label, this._value, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

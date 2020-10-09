@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorSimpleForm extends StatefulWidget {
+  CalculatorSimpleForm({Key key}) : super(key: key);
+
   @override
   _CalculatorSimpleFormState createState() => _CalculatorSimpleFormState();
 }

@@ -6,7 +6,7 @@ class ExpandedProfitInfo extends StatefulWidget {
   final String titleValue;
   final List<Widget> children;
 
-  ExpandedProfitInfo({this.title, this.titleValue, this.children});
+  ExpandedProfitInfo({Key key, this.title, this.titleValue, this.children}) : super(key: key);
 
   @override
   _ExpandedProfitInfoState createState() => _ExpandedProfitInfoState();

@@ -10,8 +10,9 @@ class DesiredInputSection extends StatelessWidget {
   DesiredInputSection(
     this.onSharePriceChanged,
     this.onDesiredProfitChanged,
-    this.onSharesAmountChanged,
-  );
+    this.onSharesAmountChanged, {
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

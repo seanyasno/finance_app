@@ -5,9 +5,11 @@ class SectionInnerInputCommission extends StatelessWidget {
   final Map<String, Object> value;
 
   SectionInnerInputCommission({
+    Key key,
     @required this.label,
     @required this.value,
-  }) : assert(value.length == 3);
+  })  : assert(value.length == 3),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {

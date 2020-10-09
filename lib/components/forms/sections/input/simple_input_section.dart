@@ -10,8 +10,9 @@ class SimpleInputSection extends StatelessWidget {
   SimpleInputSection(
     this.onPurchasePriceChanged,
     this.onSellingPriceChanged,
-    this.onShareQuantityChanged,
-  );
+    this.onShareQuantityChanged, {
+    Key key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
