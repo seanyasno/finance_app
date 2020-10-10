@@ -7,13 +7,18 @@ import 'package:flutter/foundation.dart';
 
 class ThemeTypeProvider with ChangeNotifier {
   ThemeType _themeType = ThemeType.LIGHT;
+  bool _loaded = false;
 
   ThemeType get themeType {
-    SharedPreferences.getInstance().then((prefs) {
-      _themeType = (prefs.getBool('dark_mode') ?? false) ? ThemeType.DARK : ThemeType.LIGHT;
-      _updateStatusBar();
-      notifyListeners();
-    });
+    if (!_loaded) {
+      SharedPreferences.getInstance().then((prefs) {
+        _themeType =
+        (prefs.getBool('dark_mode') ?? false) ? ThemeType.DARK : ThemeType
+            .LIGHT;
+        _updateStatusBar();
+        _loaded = true;
+      });
+    }
     return _themeType;
   }
 
@@ -23,14 +28,15 @@ class ThemeTypeProvider with ChangeNotifier {
       prefs.setBool('dark_mode', value == ThemeType.DARK);
     });
     _updateStatusBar();
-    notifyListeners();
   }
 
   void _updateStatusBar() {
+    print(_themeType);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarBrightness: _themeType == ThemeType.DARK ? Brightness.light : Brightness.dark,
       statusBarIconBrightness: _themeType == ThemeType.DARK ? Brightness.light : Brightness.dark,
     ));
+    notifyListeners();
   }
 }

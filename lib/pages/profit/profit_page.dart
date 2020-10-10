@@ -75,8 +75,7 @@ class _ProfitPageState extends State<ProfitPage> {
                     style: TextStyle(
                         color: Theme.of(context).textTheme.bodyText2.color),
                   ),
-                  // value: themeTypeNotifier.themeType == ThemeType.DARK,
-                  value: false,
+                  value: themeTypeNotifier.themeType == ThemeType.DARK,
                   onChanged: (value) {
                     if (value)
                       themeTypeNotifier.themeType = ThemeType.DARK;

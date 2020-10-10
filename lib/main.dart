@@ -31,13 +31,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ThemeType themeType = Provider.of<ThemeTypeNotifier>(context).themeType;
+    ThemeType themeType = Provider.of<ThemeTypeProvider>(context).themeType;
 
     return StreamBuilder<bool>(
-      initialData: false,
+      initialData: themeType == ThemeType.DARK,
       builder: (context, snapshot) => MaterialApp(
         title: 'Finance',
-        theme: AppThemeFactory.getThemeData(context, ThemeType.LIGHT),
+        theme: AppThemeFactory.getThemeData(context, themeType),
         home: ProfitPage(),
         debugShowCheckedModeBanner: false,
       ),
