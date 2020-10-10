@@ -34,17 +34,19 @@ class InfoSumSection extends StatelessWidget {
                             transactionSumData.sharesData.sharesQuantity))),
           ],
         ),
-        SectionInnerInfo('Spread',
-            NumberFormat().format(transactionSumData.sharesData.spread)),
+        SectionInnerInfo(
+            'Spread',
+            _fixNaN(
+                NumberFormat().format(transactionSumData.sharesData.spread))),
         SectionInnerInfoExpanded(
           'Total Selling Value',
-          NumberFormat().format(_calculateTotalSellingValue()),
+          _fixNaN(NumberFormat().format(_calculateTotalSellingValue())),
           [
             SectionInnerInfo(
                 'Shares Buying Value',
-                NumberFormat().format(
+                _fixNaN(NumberFormat().format(
                     transactionSumData.sharesData.sellingPrice *
-                        transactionSumData.sharesData.sharesQuantity)),
+                        transactionSumData.sharesData.sharesQuantity))),
             SectionInnerInfo(
                 'Buy Commission',
                 NumberFormat().format(
@@ -52,7 +54,7 @@ class InfoSumSection extends StatelessWidget {
                         data: transactionSumData.sharesData.sellingPrice *
                             transactionSumData.sharesData.sharesQuantity))),
             SectionInnerInfo('Spread Fee',
-                NumberFormat().format(transactionSumData.spreadFee)),
+                _fixNaN(NumberFormat().format(transactionSumData.spreadFee))),
           ],
         ),
       ],
@@ -80,5 +82,9 @@ class InfoSumSection extends StatelessWidget {
             data: transactionSumData.sharesData.sellingPrice *
                 transactionSumData.sharesData.sharesQuantity) -
         transactionSumData.spreadFee;
+  }
+
+  String _fixNaN(String value) {
+    return value == "NaN" ? '0' : value;
   }
 }

@@ -18,7 +18,7 @@ class InfoDesiredShareSection extends StatelessWidget {
       inners: [
         SectionInnerInfo(
           'Future Share Price',
-          NumberFormat().format(transactionSumData.sharesData.sellingPrice),
+          _fixNaN(NumberFormat().format(transactionSumData.sharesData.sellingPrice)),
         ),
         SectionInnerInfo(
           'Share Growth (%)',

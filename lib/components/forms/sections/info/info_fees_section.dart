@@ -19,7 +19,7 @@ class InfoFeesSection extends StatelessWidget {
       inners: [
         SectionInnerInfoExpanded(
           'Total Fees',
-          NumberFormat().format(transactionSumData.totalFees),
+            _fixNaN(NumberFormat().format(transactionSumData.totalFees)),
           [
             SectionInnerInfo(
               'Buy Commission',
@@ -37,7 +37,7 @@ class InfoFeesSection extends StatelessWidget {
             ),
             SectionInnerInfo(
               'Spread Fee',
-              NumberFormat().format(transactionSumData.spreadFee),
+              _fixNaN(NumberFormat().format(transactionSumData.spreadFee)),
             ),
           ],
         ),
@@ -49,5 +49,9 @@ class InfoFeesSection extends StatelessWidget {
       useVerticalPadding: false,
       addChildrenPadding: false,
     );
+  }
+
+  String _fixNaN(String value) {
+    return value == "NaN" ? '0' : value;
   }
 }
