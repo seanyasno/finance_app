@@ -47,7 +47,7 @@ class _CalculatorSimpleFormState extends State<CalculatorSimpleForm>
           FeesInputSection(
             onBuyingFeeChanged: (value) => _profitNotifier.buyCommission.value = double.parse(value),
             onSellingFeeChanged: (value) => _profitNotifier.sellCommission.value = double.parse(value),
-            onSpreadFeeChanged: (value) => _profitNotifier.spreadFee = double.parse(value),
+            onSpreadFeeChanged: (value) => _profitNotifier.spreadFee = double.parse(value) / 100,
             useBuyPercentage: _transactionSumData.commissionsData.buyCommission.usePercentage,
             useSellPercentage: _transactionSumData.commissionsData.sellCommission.usePercentage,
             useBuyPercentageChanged: (value) => _profitNotifier.buyCommission.usePercentage = value,
