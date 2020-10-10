@@ -20,6 +20,7 @@ class CommissionFee with ChangeNotifier implements IFee  {
 
   set usePercentage(bool value) {
     _usePercentage = value;
+    print('changing use');
     notifyListeners();
   }
 
