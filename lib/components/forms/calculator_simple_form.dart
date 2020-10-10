@@ -27,11 +27,11 @@ class _CalculatorSimpleFormState extends State<CalculatorSimpleForm>
   Widget build(BuildContext context) {
     super.build(context);
     _profitNotifier = Provider.of<CalculatorSimpleProvider>(context);
-    _transactionSumData = TransactionSumData(SharesData(
-        _profitNotifier.purchasePrice, _profitNotifier.sellingPrice,
-        _profitNotifier.sharesQuantity), CommissionsData(
-        _profitNotifier.buyCommission, _profitNotifier.sellCommission,
-        _profitNotifier.spreadFee));
+    _transactionSumData = TransactionSumData(
+        SharesData(_profitNotifier.purchasePrice, _profitNotifier.sellingPrice,
+            _profitNotifier.sharesQuantity),
+        CommissionsData(_profitNotifier.buyCommission,
+            _profitNotifier.sellCommission, _profitNotifier.spreadFee));
 
     return Container(
       child: Column(
@@ -45,13 +45,26 @@ class _CalculatorSimpleFormState extends State<CalculatorSimpleForm>
             height: 5,
           ),
           FeesInputSection(
-            onBuyingFeeChanged: (value) => _profitNotifier.buyCommission.value = double.parse(value),
-            onSellingFeeChanged: (value) => _profitNotifier.sellCommission.value = double.parse(value),
-            onSpreadFeeChanged: (value) => _profitNotifier.spreadFee = double.parse(value) / 100,
-            useBuyPercentage: _transactionSumData.commissionsData.buyCommission.usePercentage,
-            useSellPercentage: _transactionSumData.commissionsData.sellCommission.usePercentage,
-            useBuyPercentageChanged: (value) => _profitNotifier.buyCommission.usePercentage = value,
-            useSellPercentageChanged: (value) => _profitNotifier.sellCommission.usePercentage = value,
+            onBuyingFeeChanged: (value) =>
+                _profitNotifier.buyCommission.value = double.parse(value),
+            onSellingFeeChanged: (value) =>
+                _profitNotifier.sellCommission.value = double.parse(value),
+            onSpreadFeeChanged: (value) =>
+                _profitNotifier.spreadFee = double.parse(value) / 100,
+            useBuyPercentage:
+                _transactionSumData.commissionsData.buyCommission.usePercentage,
+            useSellPercentage: _transactionSumData
+                .commissionsData.sellCommission.usePercentage,
+            useBuyPercentageChanged: (value) {
+              setState(() {
+                _profitNotifier.buyCommission.usePercentage = value;
+              });
+            },
+            useSellPercentageChanged: (value) {
+              setState(() {
+                _profitNotifier.sellCommission.usePercentage = value;
+              });
+            },
           ),
           SizedBox(
             height: 5,

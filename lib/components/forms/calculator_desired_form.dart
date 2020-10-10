@@ -51,8 +51,16 @@ class _CalculatorDesiredFormState extends State<CalculatorDesiredForm>
             onSpreadFeeChanged: (value) => _profitNotifier.spreadFee = double.parse(value) / 100,
             useBuyPercentage: _profitNotifier.buyCommission.usePercentage,
             useSellPercentage: _profitNotifier.sellCommission.usePercentage,
-            useBuyPercentageChanged: (value) => _profitNotifier.buyCommission.usePercentage = value,
-            useSellPercentageChanged: (value) => _profitNotifier.sellCommission.usePercentage = value,
+            useBuyPercentageChanged: (value) {
+              setState(() {
+                _profitNotifier.buyCommission.usePercentage = value;
+              });
+            },
+            useSellPercentageChanged: (value) {
+              setState(() {
+                _profitNotifier.sellCommission.usePercentage = value;
+              });
+            },
           ),
           SizedBox(
             height: 5,
