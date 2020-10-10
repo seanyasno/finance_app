@@ -3,9 +3,9 @@ import 'package:finance_app/models/sections/section_inner_input.dart';
 import 'package:flutter/material.dart';
 
 class SimpleInputSection extends StatelessWidget {
-  final ValueChanged<String> onPurchasePriceChanged;
-  final ValueChanged<String> onSellingPriceChanged;
-  final ValueChanged<String> onShareQuantityChanged;
+  final ValueChanged onPurchasePriceChanged;
+  final ValueChanged onSellingPriceChanged;
+  final ValueChanged onShareQuantityChanged;
 
   SimpleInputSection(
     this.onPurchasePriceChanged,
