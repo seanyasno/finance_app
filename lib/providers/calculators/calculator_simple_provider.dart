@@ -1,7 +1,7 @@
 import 'package:finance_app/models/commission_fee.dart';
 import 'package:flutter/material.dart';
 
-class CalculatorSimpleNotifier with ChangeNotifier {
+class CalculatorSimpleProvider with ChangeNotifier {
   double _purchasePrice = 0;
   double _sellingPrice = 0;
   int _sharesQuantity = 0;

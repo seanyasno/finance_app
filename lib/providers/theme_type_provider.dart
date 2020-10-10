@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:finance_app/models/types/theme_type.dart';
 import 'package:flutter/foundation.dart';
 
-class ThemeTypeNotifier with ChangeNotifier {
+class ThemeTypeProvider with ChangeNotifier {
   ThemeType _themeType = ThemeType.LIGHT;
 
   ThemeType get themeType {

@@ -1,7 +1,7 @@
 import 'package:finance_app/components/forms/calculator_desired_form.dart';
 import 'package:finance_app/components/forms/calculator_simple_form.dart';
-import 'package:finance_app/notifiers/theme-type-notifier.dart';
 import 'package:finance_app/models/types/theme_type.dart';
+import 'package:finance_app/providers/theme_type_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +15,8 @@ class ProfitPage extends StatefulWidget {
 class _ProfitPageState extends State<ProfitPage> {
   @override
   Widget build(BuildContext context) {
-    ThemeTypeNotifier themeTypeNotifier =
-        Provider.of<ThemeTypeNotifier>(context);
+    ThemeTypeProvider themeTypeNotifier =
+        Provider.of<ThemeTypeProvider>(context);
 
     return DefaultTabController(
       length: 2,

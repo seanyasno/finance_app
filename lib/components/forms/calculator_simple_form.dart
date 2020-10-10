@@ -6,7 +6,7 @@ import 'package:finance_app/components/forms/sections/info/info_fees_section.dar
 import 'package:finance_app/models/data/commissions-data.dart';
 import 'package:finance_app/models/data/shares-data.dart';
 import 'package:finance_app/models/data/transaction-sum-data.dart';
-import 'package:finance_app/notifiers/calculators/calculator_simple_notifier.dart';
+import 'package:finance_app/providers/calculators/calculator_simple_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,14 +19,14 @@ class CalculatorSimpleForm extends StatefulWidget {
 
 class _CalculatorSimpleFormState extends State<CalculatorSimpleForm>
     with AutomaticKeepAliveClientMixin {
-  CalculatorSimpleNotifier _profitNotifier;
+  CalculatorSimpleProvider _profitNotifier;
 
   TransactionSumData _transactionSumData;
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    _profitNotifier = Provider.of<CalculatorSimpleNotifier>(context);
+    _profitNotifier = Provider.of<CalculatorSimpleProvider>(context);
     _transactionSumData = TransactionSumData(SharesData(
         _profitNotifier.purchasePrice, _profitNotifier.sellingPrice,
         _profitNotifier.sharesQuantity), CommissionsData(
